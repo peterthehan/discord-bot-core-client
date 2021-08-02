@@ -1,0 +1,43 @@
+{
+  "name": "create-discord-bot-core",
+  "version": "1.0.0",
+  "description": "Core client for create-discord-bot.",
+  "homepage": "https://github.com/peterthehan/create-discord-bot-core",
+  "bugs": {
+    "url": "https://github.com/peterthehan/create-discord-bot-core/issues",
+    "email": "peter.han.9493@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterthehan/create-discord-bot-core.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Peter Han",
+    "email": "peter.han.9493@gmail.com",
+    "url": "https://github.com/peterthehan"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && npx tsc",
+    "lint": "npx eslint --fix .",
+    "test": "npx jest --coverage --coverageDirectory='coverage'"
+  },
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js#master"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
+  }
+}

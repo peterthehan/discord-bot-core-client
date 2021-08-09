@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-core-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Core client for create-discord-bot.",
   "keywords": [
     "discord",

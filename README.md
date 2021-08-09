@@ -15,7 +15,7 @@ npm i discord-bot-core-client
 
 import "dotenv/config";
 import path from "path";
-import { CoreClient } from "../../discord-bot-core-client/src/index";
+import { CoreClient } from "discord-bot-core-client";
 
 const client = new CoreClient({
   token: process.env.DISCORD_BOT_TOKEN as string,

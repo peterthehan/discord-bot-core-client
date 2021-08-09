@@ -1,5 +1,5 @@
-import { Client } from "discord.js";
-import { CoreClient, CoreClientOptions, ClientOptions } from "../src/index";
+import { Client, ClientOptions } from "discord.js";
+import { CoreClient, CoreClientOptions } from "../src/index";
 
 describe("CoreClient", () => {
   describe.each([

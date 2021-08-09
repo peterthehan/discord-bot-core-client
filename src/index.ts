@@ -3,7 +3,6 @@ import path from "path";
 import {
   Client,
   ClientOptions,
-  Intents,
   BitFieldResolvable,
   IntentsString,
 } from "discord.js";
@@ -168,11 +167,4 @@ class CoreClient {
   }
 }
 
-export {
-  CoreClient,
-  CoreClientOptions,
-  ClientOptions,
-  Intents,
-  Handler,
-  HandlerMap,
-};
+export { CoreClient, CoreClientOptions };

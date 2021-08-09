@@ -28,6 +28,9 @@
     "url": "https://github.com/peterthehan"
   },
   "main": "./dist/index.js",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "rm -rf ./dist && npx tsc",
     "lint": "npx eslint --fix .",

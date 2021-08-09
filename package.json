@@ -1,6 +1,6 @@
 {
-  "name": "create-discord-bot-core",
-  "version": "1.0.0",
+  "name": "discord-bot-core-client",
+  "version": "0.0.1",
   "description": "Core client for create-discord-bot.",
   "keywords": [
     "discord",
@@ -12,14 +12,14 @@
     "nodejs",
     "discordjs"
   ],
-  "homepage": "https://github.com/peterthehan/create-discord-bot-core",
+  "homepage": "https://github.com/peterthehan/discord-bot-core-client",
   "bugs": {
-    "url": "https://github.com/peterthehan/create-discord-bot-core/issues",
+    "url": "https://github.com/peterthehan/discord-bot-core-client/issues",
     "email": "peter.han.9493@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/peterthehan/create-discord-bot-core.git"
+    "url": "https://github.com/peterthehan/discord-bot-core-client.git"
   },
   "license": "MIT",
   "author": {
@@ -34,7 +34,7 @@
     "test": "npx jest --coverage --coverageDirectory='coverage'"
   },
   "dependencies": {
-    "discord.js": "^13.0.0"
+    "discord.js": "^13.0.1"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",

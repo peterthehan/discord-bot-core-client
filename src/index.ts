@@ -5,18 +5,32 @@ import {
   ClientOptions,
   BitFieldResolvable,
   IntentsString,
+  ClientEvents,
 } from "discord.js";
+
+type IntentsResolvable = BitFieldResolvable<IntentsString, number>;
+
+type ClientEventNames = keyof ClientEvents;
 
 type Handler = (...data: unknown[]) => Promise<void>;
 
-interface HandlerMap {
-  [key: string]: Handler[];
+type HandlerImport = {
+  handlerName: ClientEventNames;
+  handler: Handler;
+};
+
+type BaseHandlerMap = {
+  [handlerName in ClientEventNames]?: Handler[];
+};
+
+interface HandlerMap extends BaseHandlerMap {
+  ready: Handler[];
 }
 
-interface CoreClientOptions {
+type CoreClientOptions = {
   token: string;
   clientOptions?: ClientOptions;
-}
+};
 
 class CoreClient {
   token: string;
@@ -90,8 +104,8 @@ class CoreClient {
   }
 
   /* istanbul ignore next */
-  private _getIntents(): BitFieldResolvable<IntentsString, number> {
-    const intents = this._getFilenames(this.botsPath)
+  private _getIntents(): IntentsResolvable {
+    const intents: IntentsResolvable = this._readFilenames(this.botsPath)
       .map((folderName) =>
         path.resolve(this.botsPath, folderName, this.intentsFileName)
       )
@@ -99,12 +113,12 @@ class CoreClient {
         try {
           return require(intentsPath);
         } catch (error) {
-          console.warn(error.message);
+          console.warn(error);
           return [];
         }
       });
 
-    return Array.from(new Set([intents, this.clientOptions.intents].flat()));
+    return [...new Set([intents, this.clientOptions.intents].flat())];
   }
 
   /* istanbul ignore next */
@@ -118,7 +132,7 @@ class CoreClient {
 
     const { ready, ...handlerMap } = this._getHandlerMap();
 
-    // ready event should only be handled once once emitted by the client
+    // ready event should only be handled once when emitted by the client
     client.once("ready", () => this._run(ready, client));
 
     // load all other listeners
@@ -129,23 +143,23 @@ class CoreClient {
 
   /* istanbul ignore next */
   private _getHandlerMap(): HandlerMap {
-    return this._getFilenames(this.botsPath)
+    return this._readFilenames(this.botsPath)
       .map((folderName) =>
         path.resolve(this.botsPath, folderName, this.handlersFolderName)
       )
       .flatMap((handlersPath) =>
-        this._getFilenames(handlersPath).map((handlerName) => ({
-          handlerName,
-          handler: require(`${handlersPath}/${handlerName}`),
-        }))
+        this._readFilenames(handlersPath).map(
+          (handlerName) =>
+            ({
+              handlerName,
+              handler: require(`${handlersPath}/${handlerName}`),
+            } as HandlerImport)
+        )
       )
       .reduce(
-        (
-          handlerMap,
-          { handlerName, handler }: { handlerName: string; handler: Handler }
-        ) => {
+        (handlerMap, { handlerName, handler }) => {
           if (handlerName in handlerMap) {
-            handlerMap[handlerName].push(handler);
+            (handlerMap[handlerName] as Handler[]).push(handler);
           } else {
             handlerMap[handlerName] = [handler];
           }
@@ -162,7 +176,7 @@ class CoreClient {
   }
 
   /* istanbul ignore next */
-  private _getFilenames(filePath: string): string[] {
+  private _readFilenames(filePath: string): string[] {
     return fs.readdirSync(filePath).map((file) => path.parse(file).name);
   }
 }

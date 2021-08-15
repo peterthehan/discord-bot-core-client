@@ -1,9 +1,9 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
+    "declaration": true,
     "outDir": "dist",
-    "lib": ["ESNext"],
-    "declaration": true
+    "lib": ["ESNext"]
   },
   "include": ["src/**/*"],
   "exclude": ["coverage", "dist", "node_modules", "test"]

@@ -10,6 +10,8 @@ Core client for create-discord-bot.
 npm i discord-bot-core-client
 ```
 
+## Example
+
 ```ts
 // src/index.ts
 
